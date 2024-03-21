@@ -155,6 +155,6 @@ if __name__ == "__main__":
     shelter1.admit_pers("Коля")
     shelter2.admit_pers("Саша")
 
- shelter1.provide_food()
+    shelter1.provide_food()
 
 ```
