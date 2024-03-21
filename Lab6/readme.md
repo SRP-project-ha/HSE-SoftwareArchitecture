@@ -47,38 +47,72 @@ client_code(shelter_factory)
 Пример:
 
 ```
+from abc import ABC, abstractmethod
+
+# Абстрактный класс поддержки
 class Support(ABC):
     @abstractmethod
     def provide_support(self):
         pass
 
+# Абстрактный класс инвентаря
 class Inventory(ABC):
     @abstractmethod
     def provide_inventory(self):
         pass
 
+# Общий абстрактный класс фабрики
+class Factory(ABC):
+    @abstractmethod
+    def create_support(self):
+        pass
+    
+    @abstractmethod
+    def create_inventory(self):
+        pass
+
 # Фабрика помощи в питании
-class FoodFactory(Support, Inventory):
+class FoodFactory(Factory):
+    def create_support(self):
+        return FoodSupport()
+
+    def create_inventory(self):
+        return FoodInventory()
+
+# Фабрика помощи в предоставлении убежища
+class ShelterFactory(Factory):
+    def create_support(self):
+        return ShelterSupport()
+
+    def create_inventory(self):
+        return ShelterInventory()
+
+# Конкретный класс помощи в питании
+class FoodSupport(Support):
     def provide_support(self):
         print("Предоставляется помощь в питании")
 
+# Конкретный класс инвентаря для питания
+class FoodInventory(Inventory):
     def provide_inventory(self):
         print("Предоставляется инвентарь для питания")
 
-# Фабрика помощи в предоставлении убежища
-class ShelterFactory(Support, Inventory):
+# Конкретный класс помощи в предоставлении убежища
+class ShelterSupport(Support):
     def provide_support(self):
         print("Предоставляется помощь в предоставлении убежища")
 
+# Конкретный класс инвентаря для убежища
+class ShelterInventory(Inventory):
     def provide_inventory(self):
         print("Предоставляется инвентарь для убежища")
 
-
 # Функция для использования фабрики
 def client_code(factory):
-    print("\nFactory:")
-    factory.provide_support()
-    factory.provide_inventory()
+    support = factory.create_support()
+    inventory = factory.create_inventory()
+    support.provide_support()
+    inventory.provide_inventory()
 
 # Пример использования
 food_factory = FoodFactory()
@@ -86,6 +120,7 @@ shelter_factory = ShelterFactory()
 
 client_code(food_factory)
 client_code(shelter_factory)
+
 ```
 
 ### Одиночка / Singleton ### 
