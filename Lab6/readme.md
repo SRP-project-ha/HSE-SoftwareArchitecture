@@ -25,6 +25,16 @@ class FoodSupport:
 class ShelterSupport:
     def provide_shelter(self):
         print("Предоставляется убежище")
+
+food_factory = FoodSupportFactory()
+shelter_factory = ShelterSupportFactory()
+
+food_support = food_factory.create_support()
+food_support.provide_food()
+
+shelter_support = shelter_factory.create_support()
+shelter_support.provide_shelter()
+
 ```
 
 ### Абстрактная фабрика / Abstract Factory ###
