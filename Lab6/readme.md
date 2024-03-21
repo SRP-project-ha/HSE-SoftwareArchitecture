@@ -83,7 +83,6 @@ def client_code(factory):
 # Пример использования
 food_factory = FoodFactory()
 shelter_factory = ShelterFactory()
-medical_factory = MedicalFactory()
 
 client_code(food_factory)
 client_code(shelter_factory)
