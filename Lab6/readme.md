@@ -131,11 +131,10 @@ client_code(shelter_factory)
 class Shelter:
     _instance = None
     
-    def __new__(cls):
-        if cls._instance is None:
+    def __new__(cls): #данный метод вызывается еще перед инит для выделения памяти для объекта, он работает именно с классом. 
+        if cls._instance is None: #если ноне то значит объекта нет и его надо создать, для этого надо вызвать метод у предка
             cls._instance = super().__new__(cls)
-            # Здесь могут быть инициализации ресурсов приюта
-        return cls._instance
+        return cls._instance #создаем объект если его не было, если был - возвращается ссылочка на объекта
     
     def admit_pers(self, pers):
         print(f"{pers} принят в приют.")
@@ -154,7 +153,5 @@ if __name__ == "__main__":
     # Добавляем людей в приют
     shelter1.admit_pers("Коля")
     shelter2.admit_pers("Саша")
-
-    shelter1.provide_food()
 
 ```
