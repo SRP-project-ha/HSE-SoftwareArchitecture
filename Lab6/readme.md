@@ -18,22 +18,27 @@ class ShelterSupportFactory(SupportFactory):
     def create_support(self):
         return ShelterSupport()
 
+
 class FoodSupport:
-    def provide_food(self):
+    def provide_support(self):
         print("Предоставляется еда")
 
 class ShelterSupport:
-    def provide_shelter(self):
+    def provide_support(self):
         print("Предоставляется убежище")
 
+# Пример использования
+
+def client_code(factory):
+    support = factory.create_support()
+    support.provide_support()  
+
 food_factory = FoodSupportFactory()
+client_code(food_factory)
+
 shelter_factory = ShelterSupportFactory()
+client_code(shelter_factory)
 
-food_support = food_factory.create_support()
-food_support.provide_food()
-
-shelter_support = shelter_factory.create_support()
-shelter_support.provide_shelter()
 
 ```
 
