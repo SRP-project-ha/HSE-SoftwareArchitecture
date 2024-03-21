@@ -44,9 +44,51 @@ client_code(shelter_factory)
 
 ### Абстрактная фабрика / Abstract Factory ###
 Зачем нужен метод: используется для создания семейств взаимосвязанных объектов без привязки к конкретным классам. .\
-Пример: есть интерфейс объекта Shelter (Притон), а также классы, реализующие этот интерфейс, такие как WarmShelter (Теплый притон) и CoolShelter (Прохладный притон).
-Существует интерфейс фабрики ShelterFactory, который содержит метод создания притона (createShelter()), а также классы фабрик, такие как WarmShelterFactory и CoolShelterFactory, которые создают теплые и прохладные притоны соответственно.
-Благодаря тому, что WarmShelter и CoolShelter наследуются от Shelter, метод фабрики ShelterFactory не обязан реализовывать каждый тип притона, а только общий интерфейс Shelter, остальное уже решают подклассы.
+Пример:
+
+```
+class Support(ABC):
+    @abstractmethod
+    def provide_support(self):
+        pass
+
+class Inventory(ABC):
+    @abstractmethod
+    def provide_inventory(self):
+        pass
+
+# Фабрика помощи в питании
+class FoodFactory(Support, Inventory):
+    def provide_support(self):
+        print("Предоставляется помощь в питании")
+
+    def provide_inventory(self):
+        print("Предоставляется инвентарь для питания")
+
+# Фабрика помощи в предоставлении убежища
+class ShelterFactory(Support, Inventory):
+    def provide_support(self):
+        print("Предоставляется помощь в предоставлении убежища")
+
+    def provide_inventory(self):
+        print("Предоставляется инвентарь для убежища")
+
+
+# Функция для использования фабрики
+def client_code(factory):
+    print("\nFactory:")
+    factory.provide_support()
+    factory.provide_inventory()
+
+# Пример использования
+food_factory = FoodFactory()
+shelter_factory = ShelterFactory()
+medical_factory = MedicalFactory()
+
+client_code(food_factory)
+client_code(shelter_factory)
+```
+
 ### Одиночка / Singleton ### 
 Зачем нужен метод: используется для обеспечения того, что у класса есть только один экземпляр и предоставление глобальной точки доступа к этому экземпляру.\
 Пример: предположим, у нас есть класс ShelterManager (Менеджер притонов), который отвечает за управление доступом к притонам для бездомных. Для обеспечения того, чтобы в системе существовал только один экземпляр ShelterManager, мы используем паттерн Одиночка. Таким образом, любой, кто нуждается в доступе к менеджеру притонов, может обратиться к глобальной точке доступа, чтобы получить этот единственный экземпляр. Это гарантирует согласованное управление притонами и предотвращает создание нескольких менеджеров, что могло бы привести к проблемам с синхронизацией и координацией.
