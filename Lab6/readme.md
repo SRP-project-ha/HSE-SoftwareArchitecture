@@ -182,10 +182,32 @@ class ShelterAdapter:
         self.homeless.sleep_outside(num_people)
 
 ```
-### Заместитель / Decorator ### 
-Зачем нужен метод: используется для динамического добавления нового функционала объектам без изменения их кода.\
-Пример:.
+### Заместитель / Proxy ### 
+Зачем нужен метод: позволяет подставлять вместо реальных объектов специальные объекты-заменители. Эти объекты перехватывают вызовы к оригинальному объекту, позволяя сделать что-то до или после передачи вызова оригиналу.\
+Пример: есть абстрактный класс Homeless, который определяет метод find_food(). Затем есть класс RealHomeless, который реализует этот метод, и класс Proxy, который является заместителем для RealHomeless. Клиентский код создает экземпляр RealHomeless, а затем передает его в конструктор Proxy, чтобы использовать его в заместителе.
+![image](https://github.com/alenatetenova/HSE-SoftwareArchitecture/assets/71338455/4e2b0b95-09cb-4f7d-b70d-61d3cfa3d8ca)
+
 ```
+class Homeless:
+    def find_food(self):
+        pass
+
+class RealHomeless(Homeless):
+    def find_food(self):
+        print("Ищем еду...")
+
+class Proxy(Homeless):
+    def __init__(self, real_homeless):
+        self.real_homeless = real_homeless
+    
+    def find_food(self):
+        print("Проверяем доступность еды...")
+        self.real_homeless.find_food()
+
+real_homeless = RealHomeless()
+proxy_homeless = Proxy(real_homeless)
+proxy_homeless.find_food()
+
 ```
 ### Декоратор / Decorator ### 
 Зачем нужен метод: используется для динамического добавления нового функционала объектам без изменения их кода.\
