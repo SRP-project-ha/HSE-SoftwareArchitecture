@@ -153,11 +153,6 @@ if __name__ == "__main__":
     # Оба экземпляра ссылаются на один и тот же объект
     print(shelter1 is shelter2)  # Выведет: True
 
-    
-    # Добавляем людей в приют
-    shelter1.admit_pers("Коля")
-    shelter2.admit_pers("Саша")
-
 ```
 
 ### Адаптер / Adapter ### 
