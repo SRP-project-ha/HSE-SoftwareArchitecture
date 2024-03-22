@@ -218,7 +218,36 @@ class ShelterAdapter:
 ```
 ```
 ### Шаблонный метод / Template Method ### 
-Зачем нужен метод: .\
-Пример:.
+Зачем нужен метод: позволяет подклассам переопределять шаги алгоритма, не меняя его общей структуры.\
+Пример: метод survive() включает в себя последовательность шагов (ищем убежище, ищем еду), которые каждый подкласс бездомного (Homeless1 и Homeless2) может реализовать по-своему.
+![image](https://github.com/alenatetenova/HSE-SoftwareArchitecture/assets/71338455/4e8eea15-53e2-445a-97ad-608f843dc7ae)
+
 ```
+class Homeless(ABC):
+    def survive(self):
+        self.find_shelter()
+        self.find_food()
+    
+    @abstractmethod
+    def find_shelter(self):
+        pass
+    
+    @abstractmethod
+    def find_food(self):
+        pass
+
+class Homeless1(Homeless):
+    def find_shelter(self):
+        print("Ищем убежище в городе...")
+    
+    def find_food(self):
+        print("Ищем еду в мусорных баках...")
+
+class Homeless2(Homeless):
+    def find_shelter(self):
+        print("Ищем убежище в пригороде...")
+    
+    def find_food(self):
+        print("Ищем съедобные растения в лесу...")
+
 ```
