@@ -162,8 +162,30 @@ if __name__ == "__main__":
 
 ### Адаптер / Adapter ### 
 Зачем нужен метод: используется для преобразования интерфейса одного класса в интерфейс, ожидаемый клиентом, чтобы классы с несовместимыми интерфейсами могли работать вместе.\
-Пример:.
+Пример: адаптируем метод sleep_outside() класса Homeless к методу provide_shelter() класса Shelter через адаптер ShelterAdapter, преобразуя входные данные метода sleep_outside() в параметры метода provide_shelter().
+![image](https://github.com/alenatetenova/HSE-SoftwareArchitecture/assets/71338455/e127278c-39dd-4401-844b-e1984e8b2970)
+
+
 ```
+def convertToServiceMethod(children):
+    return children / 2
+
+class Homeless:
+    def sleep_outside(self, children):
+        print("Sleeping outside...")
+
+class Shelter:
+    def provide_shelter(self, num_people):
+        print(f"Providing shelter for {num_people} people...")
+
+class ShelterAdapter:
+    def __init__(self, homeless):
+        self.homeless = homeless
+
+    def provide_shelter(self, children):
+        num_people = convertToServiceMethod(children)
+        self.homeless.sleep_outside(num_people)
+
 ```
 ### Декоратор / Decorator ### 
 Зачем нужен метод: используется для динамического добавления нового функционала объектам без изменения их кода.\
