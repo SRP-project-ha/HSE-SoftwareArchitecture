@@ -220,7 +220,8 @@ class ShelterAdapter:
 ### Шаблонный метод / Template Method ### 
 Зачем нужен метод: позволяет подклассам переопределять шаги алгоритма, не меняя его общей структуры.\
 Пример: метод survive() включает в себя последовательность шагов (ищем убежище, ищем еду), которые каждый подкласс бездомного (Homeless1 и Homeless2) может реализовать по-своему.
-![image](https://github.com/alenatetenova/HSE-SoftwareArchitecture/assets/71338455/4e8eea15-53e2-445a-97ad-608f843dc7ae)
+
+![image](https://github.com/alenatetenova/HSE-SoftwareArchitecture/assets/71338455/5c38cfd5-8b62-4666-a520-dd9060a7c13a)
 
 ```
 class Homeless(ABC):
