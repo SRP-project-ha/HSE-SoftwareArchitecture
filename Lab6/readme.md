@@ -103,18 +103,42 @@ if __name__ == "__main__":
     shelter.survive()
 
 ```
+### Декоратор / Decorator ### 
+Зачем нужен метод:  позволяет динамически добавлять объектам новую функциональность, оборачивая их в полезные «обёртки».\
+![image](https://github.com/alenatetenova/HSE-SoftwareArchitecture/assets/71338455/547eb3d4-7f14-4fcb-8666-92324cfba2b0)
 
+
+```
+class Homeless:
+    def survive(self):
+        pass
+
+class HomelessDecorator(Homeless):
+    def __init__(self, homeless):
+        self._homeless = homeless
+
+    def survive(self):
+        return self._homeless.survive()
+
+class BaseHomeless(Homeless):
+    def survive(self):
+        return "Выживаю на улице"
+
+class FoodDecorator(HomelessDecorator):
+    def survive(self):
+        return f"{self._homeless.survive()}, нахожу еду"
+
+class ShelterDecorator(HomelessDecorator):
+    def survive(self):
+        return f"{self._homeless.survive()}, ищу убежище"
+
+if __name__ == "__main__":
+    base_homeless = BaseHomeless()
+    decorated_homeless = ShelterDecorator(FoodDecorator(base_homeless))
+    result = decorated_homeless.survive()
+
+```
 ## Поведенческие шаблоны ##
-### Стратегия / Strategy ### 
-Зачем нужен метод: используется для определения семейства алгоритмов, инкапсуляции каждого из них и обеспечения их взаимозаменяемости.\
-Пример:.
-```
-```
-### Наблюдатель / Observer ### 
-Зачем нужен метод: используется для оповещения одних объектов о изменениях в других объектах.\
-Пример:.
-```
-```
 
 ### Шаблонный метод / Template Method ### 
 Зачем нужен метод: позволяет подклассам переопределять шаги алгоритма, не меняя его общей структуры.\
