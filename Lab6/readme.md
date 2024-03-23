@@ -57,6 +57,52 @@ proxy_homeless.find_food()
 
 ```
 
+### Компоновщик / Composite ### 
+Зачем нужен метод: позволяет сгруппировать множество объектов в древовидную структуру, а затем работать с ней так, как будто это единичный объект.\
+Пример: есть компоненты Homeless и Shelter, где Homeless представляет бездомного человека, а Shelter представляет приют. Компонент Shelter может содержать другие компоненты, в данном случае объекты Homeless. Когда вызывается метод survive() для приюта, он также вызывает метод survive() для каждого компонента внутри себя.
+
+![image](https://github.com/alenatetenova/HSE-SoftwareArchitecture/assets/71338455/6d183241-09c3-42bd-88e4-6674c3c3f025)
+
+```
+class Component:
+    def survive(self):
+        pass
+
+class Homeless(Component):
+    def __init__(self, name):
+        self.name = name
+
+    def survive(self):
+        print(f"{self.name}: Ищу еду и убежище...")
+
+class Shelter(Component):
+    def __init__(self):
+        self.components = []
+
+    def add_component(self, component):
+        self.components.append(component)
+
+    def remove_component(self, component):
+        self.components.remove(component)
+
+    def survive(self):
+        print("В приюте:")
+        for component in self.components:
+            component.survive()
+
+if __name__ == "__main__":
+    # Создаем бездомных людей
+    homeless1 = Homeless("Иван")
+    homeless2 = Homeless("Мария")
+
+    shelter = Shelter()
+
+    shelter.add_component(homeless1)
+    shelter.add_component(homeless2)
+
+    shelter.survive()
+
+```
 
 ## Поведенческие шаблоны ##
 ### Стратегия / Strategy ### 
